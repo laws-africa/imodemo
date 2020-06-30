@@ -1,0 +1,11 @@
+baseurl: null
+description: 'IMO documents demo'
+exclude:
+- bin
+- requirements.txt
+- README.md
+- Gemfile*
+markdown: kramdown
+timezone: Africa/Johannesburg
+title: IMO Demo
+url: https://imodemo.laws.africa
