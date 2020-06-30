@@ -1877,14 +1877,7 @@ toc:
       
 
       
-        
-          
-            <li class="verification-notice">
-              [Note: The original publication document is not available and this content could not be verified.]
-            </li>
-          
-        
-      
+
     </ul>
   
 
