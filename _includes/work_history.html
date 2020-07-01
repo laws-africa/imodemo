@@ -15,7 +15,8 @@
           <div>
             {% if event.event == "amendment" %}
               Amended by
-              <a href="{{ event.amending_uri }}/eng/"><i>{{ event.amending_title }}</i></a>
+              {% assign amending = site.data.works[page.place_code] | where: "frbr_uri", event.amending_uri | first %}
+              <a href="{{ event.amending_uri }}/eng/"><i>{{ amending.numbered_title }}</i></a>
 
             {% elsif event.event == "assent" %}
               Assented to by council.
