@@ -13,8 +13,14 @@ $akn-para-spacing: 0.8em !default;     // see http://practicaltypography.com/spa
   }
 
   .akn-crossHeading {
+    text-align: left;
+    font-style: normal;
+    position: relative;
+
+    h3 {
       font-weight: bold;
-      font-style: normal;
+      text-align: center;
+    }
   }
 
   .akn-container,

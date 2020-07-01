@@ -62,7 +62,7 @@ extra_js:
 </header>
 
 <article>
-  <div class="container">
+  <div class="container-fluid">
     {% if page.languages.size > 1 %}
       <div class="lang-changer">
         Change language:
@@ -91,7 +91,7 @@ extra_js:
       <div class="tab-content">
         <div aria-labelledby="main-tab" class="tab-pane fade show active" id="main" role="tabpanel">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <nav class="left-nav">
                 <aside class="toc">
                   {% include toc.html %}
@@ -99,8 +99,8 @@ extra_js:
               </nav>
 
             </div>
-            <div class="col-md-8">
-              <article class="akoma-ntoso akoma-ntoso-container country-un" id="top" lang="{{ page.language2 }}">
+            <div class="col-md-9">
+              <article class="akoma-ntoso akoma-ntoso-container country-un notes-aside" id="top" lang="{{ page.language2 }}">
                 {{ content }}
               </article>
             </div>
