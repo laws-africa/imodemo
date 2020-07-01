@@ -322,6 +322,22 @@ class Updater:
             f.write(html)
 
         if not expr['stub']:
+            # only for subsequent expressions
+            if expr['expression_date'] in dates:
+                # write the diff
+                log.info(f"- Fetching diff")
+                resp = self.indigo.get(expr['url'] + '/diff.html', timeout=TIMEOUT)
+                resp.raise_for_status()
+                # wrap in DIV tags so that markdown doesn't get confused
+                html = "<div>" + resp.text + "</div>"
+                html = html.replace('href="/akn/', 'href="/')
+                with open(os.path.join(dirname, "diff.md"), "w") as f:
+                    f.write("---\n")
+                    metadata['layout'] = 'diff'
+                    yaml.dump(metadata, f)
+                    f.write("---\n\n")
+                    f.write(html)
+
             if not self.skip_images:
                 self.write_images(place, expr, dirname)
 

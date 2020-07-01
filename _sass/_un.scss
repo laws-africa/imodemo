@@ -17,6 +17,12 @@ $akn-para-spacing: 0.8em !default;     // see http://practicaltypography.com/spa
       font-style: normal;
   }
 
+  .akn-container,
+  .akn-intro,
+  .akn-wrapUp {
+    display:block;
+  }
+
   // from indigo-web
   .akn-subparagraph {
     display: block;

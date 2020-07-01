@@ -63,70 +63,44 @@ extra_js:
 
 <article>
   <div class="container">
-    {% if page.languages.size > 1 %}
-      <div class="lang-changer">
-        Change language:
+    <div class="tab-content">
+      <div aria-labelledby="main-tab" class="tab-pane fade show active" id="main" role="tabpanel">
+        <div class="row">
+          <div class="col-md-4">
+            <nav class="left-nav">
+              <aside class="toc">
+                {% include toc.html %}
+              </aside>
+            </nav>
 
-        <ul class="list-inline">
-          {% for lang in page.languages %}
-            <li class="list-inline-item">
-              <a href="../{{ lang.code }}{% unless page.latest_expression %}@{{ page.expression_date }}{% endunless %}/" class="{% if page.language == lang.code %}text-muted{% endif %}">{{ lang.name }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-
-    <div id="notices">
-      {% include work_notices.html %}
-    </div>
-
-    {% if work.stub %}
-      <article class="akoma-ntoso akoma-ntoso-container stub country-un">
-        {{ content }}
-      </article>
-      {% include work_stub.html %}
-
-    {% else %}
-      <div class="tab-content">
-        <div aria-labelledby="main-tab" class="tab-pane fade show active" id="main" role="tabpanel">
-          <div class="row">
-            <div class="col-md-4">
-              <nav class="left-nav">
-                <aside class="toc">
-                  {% include toc.html %}
-                </aside>
-              </nav>
-
-            </div>
-            <div class="col-md-8">
-              <article class="akoma-ntoso akoma-ntoso-container country-un" id="top" lang="{{ page.language2 }}">
-                {{ content }}
-              </article>
-            </div>
+          </div>
+          <div class="col-md-8">
+            <article class="akoma-ntoso akoma-ntoso-container country-un diffset" id="top" lang="{{ page.language2 }}">
+              {{ content }}
+            </article>
           </div>
         </div>
-
-        <div aria-labelledby="toc-tab" class="tab-pane fade" id="toc" role="tabpanel">
-          <section class="toc">
-            {% include toc.html %}
-          </section>
-        </div>
-
-        <div aria-labelledby="resources-tab" class="tab-pane fade" id="resources" role="tabpanel">
-          <section class="resources">
-            <div class="mt-3">
-              <div class="row">
-                <div class="col-sm-8 mb-3">
-                  {% include work_history.html %}
-                </div>
-              </div>
-            </div>
-
-          </section>
-        </div>
       </div>
 
+      <div aria-labelledby="toc-tab" class="tab-pane fade" id="toc" role="tabpanel">
+        <section class="toc">
+          {% include toc.html %}
+        </section>
+      </div>
+
+      <div aria-labelledby="resources-tab" class="tab-pane fade" id="resources" role="tabpanel">
+        <section class="resources">
+          <div class="mt-3">
+            <div class="row">
+              <div class="col-sm-8 mb-3">
+                {% include work_history.html %}
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </div>
     </div>
-  {% endif %}
+
+  </div>
 </article>
