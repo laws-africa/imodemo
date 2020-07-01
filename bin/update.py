@@ -248,6 +248,8 @@ class Updater:
 
         # all languages and points in time
         expressions = [exp for pit in work['points_in_time'] for exp in pit['expressions']]
+        if work['stub'] and not expressions:
+            expressions = [work]
 
         # point-in-time dates
         dates = sorted(list(set(x['date'] for x in work['amendments'])))
