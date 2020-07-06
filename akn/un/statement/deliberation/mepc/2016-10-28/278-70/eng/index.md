@@ -82,6 +82,14 @@ toc:
   
     <h1>Amendments to MARPOL Annex VI</h1>
   
+
+  
+    
+      
+        <h2>Resolution MEPC.278(70)</h2>
+      
+    
+  
 </div>
 
 

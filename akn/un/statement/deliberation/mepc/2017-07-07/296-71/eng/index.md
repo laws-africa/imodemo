@@ -30,6 +30,14 @@ toc: []
   
     <h1>Amendments to MARPOL Annex VI</h1>
   
+
+  
+    
+      
+        <h2>Resolution MEPC.296(71)</h2>
+      
+    
+  
 </div>
 
 
