@@ -179,7 +179,7 @@
     "repealed": false,
     "stub": false,
     "title": "Amendments to MARPOL Annex VI",
-    "type_name": "Deliberation",
+    "type_name": "Resolution",
     "url": "http://localhost:8000/v2/akn/un/statement/deliberation/mepc/2016-10-28/278-70/eng@2016-10-28"
   },
   {
@@ -206,7 +206,7 @@
     "repealed": false,
     "stub": true,
     "title": "Amendments to MARPOL Annex VI",
-    "type_name": "Deliberation",
+    "type_name": "Resolution",
     "url": "http://localhost:8000/v2/akn/un/statement/deliberation/mepc/2017-07-07/296-71/eng@2017-07-07"
   },
   {
@@ -233,7 +233,7 @@
     "repealed": false,
     "stub": true,
     "title": "Amendments to MARPOL Annex VI",
-    "type_name": "Deliberation",
+    "type_name": "Resolution",
     "url": "http://localhost:8000/v2/akn/un/statement/deliberation/mepc/2018-10-26/305-73/eng@2018-10-26"
   },
   {
@@ -260,7 +260,7 @@
     "repealed": false,
     "stub": true,
     "title": "Amendments to MARPOL Annex VI",
-    "type_name": "Deliberation",
+    "type_name": "Resolution",
     "url": "http://localhost:8000/v2/akn/un/statement/deliberation/mepc/2019-05-17/316-74/eng@2019-05-17"
   }
 ]

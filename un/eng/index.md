@@ -108,7 +108,7 @@ expressions:
   repealed: false
   stub: false
   title: Amendments to MARPOL Annex VI
-  type_name: Deliberation
+  type_name: Resolution
   url: http://localhost:8000/v2/akn/un/statement/deliberation/mepc/2016-10-28/278-70/eng@2016-10-28
 language: eng
 languages:

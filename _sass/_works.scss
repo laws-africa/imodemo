@@ -28,6 +28,11 @@
   :target {
     animation: fadeout 2s;
   }
+
+  .sec-ref {
+    text-decoration: underline solid purple;
+    cursor: pointer;
+  }
 }
 
 .downloads {

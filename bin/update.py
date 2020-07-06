@@ -317,6 +317,12 @@ class Updater:
         # rewrite /akn references
         html = re.sub(r'href="//akn/([^"]+)"', r'href="/akn/\1/eng/"', html)
 
+        if work['frbr_uri'] == '/akn/un/statement/deliberation/mepc/2016-10-28/278-70':
+            # merge in magic references
+            refs = "38(a) 16(2)(d) 16(2)(f)(iii) 16(2)(g)(ii) 16(2)(e)".split()
+            refs_re = re.compile(r'\b(Article (' + '|'.join(re.escape(r) for r in refs) + r'))', flags=re.IGNORECASE)
+            html = refs_re.sub(r'<span class="sec-ref" data-sec-ref="\2">\1</span>', html)
+
         with open(fname, "w") as f:
             f.write("---\n")
             yaml.dump(metadata, f)
