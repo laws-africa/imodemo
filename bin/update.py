@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from itertools import groupby, chain
 import argparse
 import copy
+import re
 
 import yaml
 import requests
@@ -41,6 +42,7 @@ class Updater:
     indigo.headers['Authorization'] = 'Token ' + INDIGO_AUTH_TOKEN
 
     def remove_akn(self, work):
+        return
         # remove /akn/
         work['frbr_uri'] = work['frbr_uri'][4:]
         work['expression_frbr_uri'] = work['expression_frbr_uri'][4:]
@@ -308,12 +310,12 @@ class Updater:
                 date = datetime.strptime(dates[ix], '%Y-%m-%d').date() - timedelta(days=1)
                 metadata['in_force_to'] = date.strftime('%Y-%m-%d')
 
-        resp = self.indigo.get(expr['url'] + '.html', timeout=TIMEOUT)
+        resp = self.indigo.get(expr['url'] + '.html', params={'resolver': '/'}, timeout=TIMEOUT)
         resp.raise_for_status()
         # wrap in DIV tags so that markdown doesn't get confused
         html = "<div>" + resp.text + "</div>"
         # rewrite /akn references
-        html = html.replace('href="/akn/', 'href="/')
+        html = re.sub(r'href="//akn/([^"]+)"', r'href="/akn/\1/eng/"', html)
 
         with open(fname, "w") as f:
             f.write("---\n")
