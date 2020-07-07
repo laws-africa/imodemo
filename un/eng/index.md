@@ -1,6 +1,5 @@
 ---
 alternates: []
-description: By-laws for UN IMO, up-to-date and easy to read and share.
 expressions:
 - amendments:
   - amending_title: Amendments to MARPOL Annex VI
@@ -190,5 +189,5 @@ languages:
   name: English
 layout: place
 place_code: un
-title: UN IMO By-laws
+title: UN IMO
 ---

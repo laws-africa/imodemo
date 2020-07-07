@@ -120,8 +120,7 @@ class Updater:
                     del expr['toc']
 
             metadata = {
-                'title': f"{place['name']} By-laws",
-                'description': f"By-laws for {place['name']}, up-to-date and easy to read and share.",
+                'title': place['name'],
                 'layout': 'place',
                 'place_code': place['code'],
                 'language': lang,
