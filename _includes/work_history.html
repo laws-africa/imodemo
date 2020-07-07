@@ -36,7 +36,7 @@
 
         {% if entry.date != page.expression_date %}
           {% if entry.expression_frbr_uri %}
-            <a class="btn btn-outline-primary mt-2" href="{{ entry.expression_frbr_uri }}/">Read this version</a>
+            <a class="btn btn-outline-primary mt-2" href="/akn{{ entry.expression_frbr_uri }}/">Read this version</a>
           {% endif %}
         {% endif %}
       </li>
