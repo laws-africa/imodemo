@@ -6,7 +6,7 @@ layout: base
 <header>
   <div class="container">
     <div class="header-content">
-      <h1>IMO Conventions</h1>
+      <h1>IMO</h1>
     </div>
   </div>
 </header>
@@ -15,6 +15,7 @@ layout: base
   <div class="container">
     <div class="row">
       <div class="col">
+        <h4>Conventions</h4>
 
         <table class="table table-sm table-hover">
           <thead class="thead-light">
@@ -116,31 +117,45 @@ layout: base
           </tbody>
         </table>
 
-        {% assign repealed = page.expressions | where: "repealed", "true" | sort: "title" %}
-        {% if repealed.size > 0 %}
-          <h4 class="mt-4">Repealed</h4>
+        <hr>
 
-          <table class="table table-sm table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th>Title</th>
-                <th>Published</th>
-                <th>Repealed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for work in repealed %}
-                <tr>
-                  <td>
-                    <a href="{{ work.frbr_uri }}/{{ work.language }}/">{{ work.title }}</a>
-                  </td>
-                  <td class="text-nowrap">{{ work.publication_date }}</td>
-                  <td class="text-nowrap">{{ work.repeal.date }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        {% endif %}
+        <h4>Resolutions</h4>
+
+        <table class="table table-sm table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Title</th>
+              <th>Adopted</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/akn/un/statement/deliberation/imo/2017-12-06/a-1126-30/eng/">Resolution A.1126(30) - Linkages Between the Technical Assistance Work of IMO and the 2030 Agenda for Sustainable Development</a></td>
+              <td>2017-12-06</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Revoked</h5>
+
+        <table class="table table-sm table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Title</th>
+              <th>Adopted</th>
+              <th>Revoked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/akn/un/statement/deliberation/imo/2007-11-20/a-1006-25/eng/">Resolution A.1006(25) - The Linkage Between the Integrated Technical Co-Operation Programme and the Millennium Development Goals</a></td>
+              <td>2007-11-20</td>
+              <td>2017-12-06</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

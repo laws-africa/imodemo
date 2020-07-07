@@ -78,6 +78,80 @@ expressions:
   type_name: Convention
   url: http://localhost:8000/v2/akn/un/act/conv/imo/1997/marpol-annex-vi/eng@2020-10-01
 - amendments: []
+  as_at_date: '2007-11-20'
+  assent_date: null
+  commencement_date: '2007-11-20'
+  expression_date: '2007-11-20'
+  expression_frbr_uri: /akn/un/statement/deliberation/imo/2007-11-20/a-1006-25/eng@2007-11-20
+  frbr_uri: /akn/un/statement/deliberation/imo/2007-11-20/a-1006-25
+  full_publication: None no. None
+  has_parent: false
+  language: eng
+  languages:
+  - eng
+  multiple_pits: false
+  numbered_title: Resolution A.1006(25)
+  parent_work: null
+  points_in_time:
+  - date: '2007-11-20'
+    expressions:
+    - expression_date: '2007-11-20'
+      expression_frbr_uri: /akn/un/statement/deliberation/imo/2007-11-20/a-1006-25/eng@2007-11-20
+      language: eng
+      title: The Linkage Between the Integrated Technical Co-Operation Programme and
+        the Millennium Development Goals
+      url: http://localhost:8000/v2/akn/un/statement/deliberation/imo/2007-11-20/a-1006-25/eng@2007-11-20
+  publication_date: '2007-11-20'
+  publication_document: null
+  publication_name: null
+  publication_number: null
+  repeal:
+    date: '2017-12-06'
+    repealing_title: Linkages Between the Technical Assistance Work of IMO and the
+      2030 Agenda for Sustainable Development
+    repealing_uri: /akn/un/statement/deliberation/imo/2017-12-06/a-1126-30
+  repealed: true
+  stub: false
+  title: The Linkage Between the Integrated Technical Co-Operation Programme and the
+    Millennium Development Goals
+  type_name: Resolution
+  url: http://localhost:8000/v2/akn/un/statement/deliberation/imo/2007-11-20/a-1006-25/eng@2007-11-20
+- amendments: []
+  as_at_date: '2017-12-06'
+  assent_date: null
+  commencement_date: '2017-12-06'
+  expression_date: '2017-12-06'
+  expression_frbr_uri: /akn/un/statement/deliberation/imo/2017-12-06/a-1126-30/eng@2017-12-06
+  frbr_uri: /akn/un/statement/deliberation/imo/2017-12-06/a-1126-30
+  full_publication: None no. None
+  has_parent: false
+  language: eng
+  languages:
+  - eng
+  multiple_pits: false
+  numbered_title: Resolution A.1126(30)
+  parent_work: null
+  points_in_time:
+  - date: '2017-12-06'
+    expressions:
+    - expression_date: '2017-12-06'
+      expression_frbr_uri: /akn/un/statement/deliberation/imo/2017-12-06/a-1126-30/eng@2017-12-06
+      language: eng
+      title: Linkages Between the Technical Assistance Work of IMO and the 2030 Agenda
+        for Sustainable Development
+      url: http://localhost:8000/v2/akn/un/statement/deliberation/imo/2017-12-06/a-1126-30/eng@2017-12-06
+  publication_date: '2017-12-06'
+  publication_document: null
+  publication_name: null
+  publication_number: null
+  repeal: null
+  repealed: false
+  stub: false
+  title: Linkages Between the Technical Assistance Work of IMO and the 2030 Agenda
+    for Sustainable Development
+  type_name: Resolution
+  url: http://localhost:8000/v2/akn/un/statement/deliberation/imo/2017-12-06/a-1126-30/eng@2017-12-06
+- amendments: []
   as_at_date: '2016-10-28'
   assent_date: null
   commencement_date: '2018-03-01'
