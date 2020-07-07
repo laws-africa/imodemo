@@ -1815,11 +1815,7 @@ toc:
   
 
   
-    <div class="place-name">
-      
-      United Nations
-    </div>
-  
+
 
   
     
