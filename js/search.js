@@ -23,6 +23,9 @@ ByLawSearch = function() {
     if (!q) return;
     var params = {};
 
+    // all terms are required
+    q = "+" + q.split(/\s+/).join(" +");
+
     var hits = idx.search(q);
 
     console.log(hits);
