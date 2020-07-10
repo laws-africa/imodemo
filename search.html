@@ -2,23 +2,16 @@
 title: Search - Open By-laws South Africa
 layout: base
 extra_js:
+- 'https://unpkg.com/lunr/lunr.js'
+- 'https://cdn.jsdelivr.net/npm/underscore@1.10.2/underscore.min.js'
 - '/js/vendor/mustache.js'
 - '/js/search.js'
 ---
-<header>
-  <div class="container">
-    <div class="header-content">
-      <h1>Search the by-laws</h1>
-    </div>
-  </div>
-</header>
-
 
 <article>
   <div class="container">
     <div class="clearfix">
       <form action="/search.html" class="form-horizontal" id="search" method="get">
-        <input name="region" type="hidden" value="">
         <div class="input-group">
           <input autofocus="autofocus" class="form-control" id="query" name="q" placeholder="What are you looking for?" type="text">
           <div class="input-group-append">
@@ -30,9 +23,6 @@ extra_js:
         </div>
       </form>
     </div>
-    <div id="search-waiting">
-      Searching...
-    </div>
     <div id="search-results"></div>
 
   </div>
@@ -40,48 +30,34 @@ extra_js:
 
 <script id="search-result-tmpl" type="x-tmpl-mustache">
 {% raw %}
-<div class="row">
-  <div class="col-md-3">
-    <div class="list-group">
-      <a class="list-group-item {{#no_region}}active{{/no_region}}" href="#">
-        <span>All Cities</span>
-      </a>
-      {{#regions}}
-      <a class="list-group-item {{#active}}active{{/active}}" data-code="{{ code }}" href="#">
-        <span>{{name}}</span>
-      </a>
-      {{/regions}}
-    </div>
-  </div>
-  <div class="col-md-9">
-    <p class="search-results-summary">
-    Found {{ count }} by-laws
-    </p>
-    {{^count}}
-    <p>
-    We couldn't find anything relating to
-    <em>{{q}}</em>
-    </p>
-    {{/count}}
-    <ul class="search-results">
-      {{#hits.hits}}
-      <li>
-        <a href="{{ url }}">{{{ title }}}</a>
-        {{#repealed}}
-        <span class="label label-warning">repealed</span>
-        {{/repealed}}
-        <div class="info">{{ region.name }}</div>
-        {{#snippet}}
-        <div class="snippet">... {{{ snippet }}} ...</div>
-        {{/snippet}}
-      </li>
-      {{/hits.hits}}
+  {{#count}}
+    <p class="search-results-summary">Found {{ count }} provisions</p>
+  {{/count}}
+  {{^count}}
+    <p>We couldn't find anything relating to <em>{{q}}</em></p>
+  {{/count}}
+
+  <ul class="search-results">
+    {{#groups}}
+    <li>
+      <h5>{{ title }}</h5>
+      <ol class="list-unstyled">
+        {{#hits}}
+          <li>
+            <a href="{{ doc.url }}">{{{ doc.heading }}}</a>
+            {{#snippet}}
+            <div class="snippet">... {{{ snippet }}} ...</div>
+            {{/snippet}}
+          </li>
+        {{/hits}}
+      </ol>
+    </li>
+    {{/groups}}
     </ul>
   </div>
-</div>
 {% endraw %}
 </script>
 
 <script type="text/javascript">
-var REGIONS = {{ site.data.places | jsonify }};
+var SEARCH_DATA = {{ site.data.search|jsonify }};
 </script>

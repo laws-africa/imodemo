@@ -1,76 +1,73 @@
 ByLawSearch = function() {
   var self = this;
 
+  var document_index = _.indexBy(SEARCH_DATA, 'url');
+
+  var idx = lunr(function () {
+    this.ref('url');
+    this.field('heading');
+    this.field('body');
+    this.metadataWhitelist = ['position'];
+
+    SEARCH_DATA.forEach(function (doc) { this.add(doc) }, this);
+  });
+
   var $form = $('form#search');
   var $results = $('#search-results');
-  var $waiting = $('#search-waiting');
   var template = $('#search-result-tmpl').html();
   var $submit = $form.find('button[type=submit]');
   Mustache.parse(template);
-  var places = {};
-  REGIONS.forEach(function(p) {
-    places[p.code] = p;
-  });
 
   self.search = function() {
-    var q = $form.find('input[name=q]').val();
-    var region_code = $form.find('input[name=region]').val();
+    var q = $form.find('input[name=q]').val().trim();
+    if (!q) return;
     var params = {};
 
-    $submit.find('.fas').removeClass('d-none');
+    var hits = idx.search(q);
 
-    $results.hide();
-    $waiting.show();
+    console.log(hits);
 
-    params = {
-      q: q,
-      country: 'za',
-    };
-    
-    if (region_code) {
-      params.frbr_uri__startswith = '/akn/' + region_code + '/';
-    }
+    hits.forEach(function(result) {
+      result.url = result.ref;
+      result.doc = document_index[result.ref];
 
-    $.getJSON('https://srbeugae08.execute-api.eu-west-1.amazonaws.com/default/searchOpenBylaws', params, function(response, textStatus, jqXHR) {
-      var hits = [];
-      $submit.find('.fas').addClass('d-none');
-      console.log(response);
+      // snippets
+      var snippets = [];
 
-      response.q = q;
-      response.results.forEach(function(result) {
-        result.region = places['za-' + result.locality];
+      // snippets for each search term
+      _.forEach(result.matchData.metadata, function(info, term) {
+        if (info.body) {
+          info.body.position.forEach(function(pair) {
+            var body = result.doc.body,
+                start = pair[0],
+                end = pair[0] + pair[1],
+                prefix = body.substring(start - 15, start),
+                suffix = body.substring(end, end + 15),
+                snippet = '<mark>' + body.substring(start, end) + '</mark>';
 
-        // only keep those with a region
-        if (result.region) {
-          hits.push(result);
-
-          result.url = (result.region.microsite ? ('https://' + result.region.bucket) : '') +
-            result.frbr_uri.slice(4) + "/" + result.language + "/";
-
-          result.snippet = result._snippet
-            .replace(/^\s*[;:",.()-]+/, '')  // trim leading punctuation
-            .replace(/<b>/g, "<mark>")
-            .replace(/<\/b>/g, "</mark>")
-            .trim();
+            snippets.push(prefix + snippet + suffix);
+          });
         }
       });
-
-      response.hits = {hits: hits};
-      response.no_region = region_code === "";
-      response.regions = [];
-      for (var code in places) {
-        var region = places[code];
-        region.active = code == region_code;
-        response.regions.push(region);
-      }
-
-      $results
-        .empty()
-        .append(Mustache.render(template, response))
-        .show();
-
-      $waiting.hide();
+      result.snippet = snippets.join(' ... ');
     });
+
+    // group by title
+    var groups = _.map(_.groupBy(hits, function(h) { return h.doc.work; }), function(val, key) {
+      return {
+        'title': key,
+        'hits': val,
+      }
+    });
+
+    hits = {
+      q: q,
+      count: hits.length,
+      groups: groups,
+    };
+    $results
+      .empty()
+      .append(Mustache.render(template, hits));
   };
 
   self.submitSearch = function(e) {
@@ -100,14 +97,8 @@ ByLawSearch = function() {
     }
   };
 
-  // handle clicks on a city
-  $results.on('click', '.list-group-item', function(e) {
-    e.preventDefault();
-    $form.find('[name=region]').val($(this).data('code'));
-    $form.submit();
-  });
-
   $form.on('submit', self.submitSearch);
+  $form.find('input').on('keyup', self.submitSearch);
   window.onpopstate = self.searchFromUri;
 
   return self;

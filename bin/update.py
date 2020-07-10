@@ -12,6 +12,7 @@ import re
 
 import yaml
 import requests
+from lxml import etree
 
 # setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)8s %(message)s')
@@ -40,6 +41,7 @@ if not INDIGO_AUTH_TOKEN:
 class Updater:
     indigo = requests.Session()
     indigo.headers['Authorization'] = 'Token ' + INDIGO_AUTH_TOKEN
+    search_data = []
 
     def remove_akn(self, work):
         return
@@ -63,6 +65,9 @@ class Updater:
         for place in places:
             if not place_codes or place['code'] in place_codes:
                 self.write_place(place)
+
+        with open("_data/search.json", "w") as f:
+            json.dump(self.search_data, f)
 
         with open("_data/places.json", "w") as f:
             json.dump(places, f, indent=2, sort_keys=True)
@@ -351,6 +356,9 @@ class Updater:
             if not self.skip_archive:
                 self.write_archive_formats(place, expr, dirname)
 
+        if not expr['stub'] and not use_date and not expr['repealed']:
+            self.add_expr_to_search(expr, metadata['toc'])
+
     def write_images(self, place, expr, dirname):
         images = []
 
@@ -467,6 +475,42 @@ class Updater:
         events.sort(key=lambda e: e['date'], reverse=True)
 
         return events
+
+    def add_expr_to_search(self, expr, toc):
+        """ Add an entry to the search index for each leaf provision in the toc.
+        """
+        resp = self.indigo.get(expr['url'] + '.xml', timeout=TIMEOUT)
+        resp.raise_for_status()
+        data = resp.content
+        xml = etree.fromstring(data)
+
+        def process(entry, title):
+            if title and entry['type'] != 'part':
+                title = title + ' / ' + entry['title']
+            else:
+                title = entry['title']
+
+            if entry.get('children'):
+                # descend
+                for c in entry['children']:
+                    process(c, title)
+            else:
+                # leaf
+                info = {
+                    'url': f'{expr["frbr_uri"]}/eng/#{entry["id"]}',
+                    'work': expr['title'],
+                    'heading': title,
+                    'body': self.get_provision_text(entry, xml),
+                }
+                self.search_data.append(info)
+
+        for e in toc:
+            process(e, '')
+
+    def get_provision_text(self, entry, xml):
+        element = xml.xpath(f'//*[@eId="{entry["id"]}"]')[0]
+        xpath = etree.XPath(".//text()", namespaces={'a': xml.nsmap[None]})
+        return ' '.join(xpath(element))
 
 
 if __name__ == '__main__':
